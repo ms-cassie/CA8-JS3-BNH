@@ -13,63 +13,87 @@
 
 	<script type="text/javascript">
 		// Set initial game state
+		let playing = true;
 		let winner = '';
+		let playerChoice = '';
+		let computerChoice = '';
 
 		// Game choices
 		const choices = ['bear', 'ninja', 'hunter'];
-
-		// Generate random number to use for computer choice
-		const randomNum = Math.floor(Math.random() * 3);
-
-		let computerChoice = '';
-		// Iterate over choices to set computer choice
-		choices.forEach((choice, index) => {
-			if (index === randomNum) {
-				computerChoice = choice;
-			}
-		});
 
 		// Get player name and alert
 		const playerName = prompt("Welcome to Bear Hunter Ninja! Please enter your name to get started:");
 		alert(`Hi ${playerName} Let's play!!`);
 
-		// Get player choice & set computer choice (force to lowercase)
-		const playerChoice = prompt("Who are you: Bear, Ninja, or Hunter?").toLowerCase();
+		// Start while loop to play game
+		do {
+			// Reset game variables
+			winner = '';
+			playerChoice = '';
+			computerChoice = '';
 
-		// Print the game output to the console
-		console.log(`${playerName}, You picked ${playerChoice}!`);
-		console.log(`The computer picked ${computerChoice}!`);
-
-		// Evaluate user choice based on game rules
-		// Bear beats Ninja, Ninja beats Hunter, and Hunter beats Bear
-		switch (playerChoice) {
-			case 'bear':
-				if (computerChoice === 'ninja') {
-					winner = 'player';
-				}else if (computerChoice === 'hunter') {
-					winner = 'computer';
+			// Generate random number to use for computer choice
+			const randomNum = Math.floor(Math.random() * 3);
+			
+			// Iterate over choices to set computer choice
+			choices.forEach((choice, index) => {
+				if (index === randomNum) {
+					computerChoice = choice;
 				}
+			});			
 
-				break;
-			case 'hunter':
-				if (computerChoice === 'bear') {
-					winner = 'player';
-				}else if (computerChoice === 'ninja') {
-					winner = 'computer';
-				}
+			// Get player choice & set computer choice (force to lowercase)
+			playerChoice = prompt("Who are you: Bear, Ninja, or Hunter?").toLowerCase();
 
-				break;
-			case 'ninja':
-				if (computerChoice === 'bear') {
-					winner = 'computer';
-				}else if (computerChoice === 'hunter') {
-					winner = 'player';
-				}
+			// Print the game output to the console
+			console.log(`${playerName}, You picked ${playerChoice}!`);
+			console.log(`The computer picked ${computerChoice}!`);
 
-				break;
-			default:
-				console.log('unkown choice made');
-		}
+			// Evaluate user choice based on game rules
+			// Bear beats Ninja, Ninja beats Hunter, and Hunter beats Bear
+			switch (playerChoice) {
+				case 'bear':
+					if (computerChoice === 'ninja') {
+						winner = 'player';
+					}else if (computerChoice === 'hunter') {
+						winner = 'computer';
+					}
+
+					break;
+				case 'hunter':
+					if (computerChoice === 'bear') {
+						winner = 'player';
+					}else if (computerChoice === 'ninja') {
+						winner = 'computer';
+					}
+
+					break;
+				case 'ninja':
+					if (computerChoice === 'bear') {
+						winner = 'computer';
+					}else if (computerChoice === 'hunter') {
+						winner = 'player';
+					}
+
+					break;
+				default:
+					console.log('unkown choice made');
+			}
+
+			// Change output based on game result
+			if (winner === 'player') {
+				alert(`${playerName}, You picked ${playerChoice}!\nThe computer picked ${computerChoice}!\nYou Win!!`);
+			}else if (winner === 'computer') {
+				alert(`${playerName}, You picked ${playerChoice}!\nThe computer picked ${computerChoice}!\nComputer Wins!!`);
+			}else {
+				alert(`${playerName}, You picked ${playerChoice}!\nThe computer picked ${computerChoice}!\nTie!!`);
+			}
+
+			// Ask player to play again - force lowercase
+			playAgain = prompt(`${playerName}, would you like to play again, Yes or No?`).toLowerCase();
+
+		} while (playAgain === 'yes' || playAgain === 'y');
+
 
 		// Get p element and update inner text for game results
 		const gameDialog = document.getElementById("game-dialog");
@@ -79,7 +103,7 @@
 			gameDialog.innerText = `${playerName}, You picked ${playerChoice}!\n\nThe computer picked ${computerChoice}!\n\nYou Win!!`;
 			console.log('You Win!!');
 		}else if (winner === 'computer') {
-			gameDialog.innerText = `${playerName}, You picked ${playerChoice}!\n\nThe computer picked ${computerChoice}!\n\nCopmuter Wins!!`;
+			gameDialog.innerText = `${playerName}, You picked ${playerChoice}!\n\nThe computer picked ${computerChoice}!\n\nComputer Wins!!`;
 			console.log('Computer Wins!!');
 		}else {
 			gameDialog.innerText = `${playerName}, You picked ${playerChoice}!\n\nThe computer picked ${computerChoice}!\n\nTie!!`;
