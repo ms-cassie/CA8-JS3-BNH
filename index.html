@@ -15,13 +15,26 @@
 		// Set initial game state
 		let winner = '';
 
+		// Game choices
+		const choices = ['bear', 'ninja', 'hunter'];
+
+		// Generate random number to use for computer choice
+		const randomNum = Math.floor(Math.random() * 3);
+
+		let computerChoice = '';
+		// Iterate over choices to set computer choice
+		choices.forEach((choice, index) => {
+			if (index === randomNum) {
+				computerChoice = choice;
+			}
+		});
+
 		// Get player name and alert
 		const playerName = prompt("Welcome to Bear Hunter Ninja! Please enter your name to get started:");
 		alert(`Hi ${playerName} Let's play!!`);
 
 		// Get player choice & set computer choice
-		const playerChoice = prompt("Who are you: Bear, Ninja, or Hunter?");
-		const computerChoice = "Bear";
+		const playerChoice = prompt("Who are you: Bear, Ninja, or Hunter?").toLowerCase();
 
 		// Print the game output to the console
 		console.log(`${playerName}, You picked ${playerChoice}!`);
