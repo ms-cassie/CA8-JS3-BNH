@@ -33,7 +33,7 @@
 		const playerName = prompt("Welcome to Bear Hunter Ninja! Please enter your name to get started:");
 		alert(`Hi ${playerName} Let's play!!`);
 
-		// Get player choice & set computer choice
+		// Get player choice & set computer choice (force to lowercase)
 		const playerChoice = prompt("Who are you: Bear, Ninja, or Hunter?").toLowerCase();
 
 		// Print the game output to the console
@@ -45,9 +45,9 @@
 		switch (playerChoice) {
 			case 'bear':
 				if (computerChoice === 'ninja') {
-					winner = 'computer';
-				}else if (computerChoice === 'hunter') {
 					winner = 'player';
+				}else if (computerChoice === 'hunter') {
+					winner = 'computer';
 				}
 
 				break;
